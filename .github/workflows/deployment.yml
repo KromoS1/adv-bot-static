@@ -1,0 +1,44 @@
+name: Deployment nest app 
+on: push
+jobs:
+  test: 
+   runs-on: ubuntu-latest
+   steps:
+    - name: Get Repo code
+      uses: actions/checkout@v4
+    - name: Install Bun
+      uses: oven-sh/setup-bun@v1
+      with:
+        bun-version: latest  
+    - name: Install deps  
+      run: bun i --frozen-lockfile
+    - name: Run test application
+      run: bun run test  
+
+  lint: 
+    runs-on: ubuntu-latest 
+    steps:
+      - name: Get Repo code
+        uses: actions/checkout@v4
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest  
+      - name: Install deps  
+        run: bun i --frozen-lockfile
+      - name: Lint application
+        run: bun run lint
+
+  build:
+    runs-on: ubuntu-latest 
+    steps:
+      - name: Get Repo code
+        uses: actions/checkout@v4
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest  
+      - name: Install deps  
+        run: bun i --frozen-lockfile
+      - name: Deploy application
+        run: echo Deployment app
