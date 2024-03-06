@@ -51,4 +51,4 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: kromos1/${{ github.repository }}:1.0.0
+          tags: kromos1/adv-bot-static:1.0.0
