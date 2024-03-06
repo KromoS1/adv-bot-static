@@ -2,6 +2,8 @@ name: Create and Push Docker container
 on:
   push:
     branches: main
+env:
+  username: kromos1
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -49,4 +51,4 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.repository }}:1.0.0
+          tags: ${{ env.username }}/${{ github.repository }}:1.0.0
