@@ -1,0 +1,35 @@
+name: Create and Push Docker container
+on:
+  push:
+    branches: main
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Cache Primes
+        id: cache-primes
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun
+          key: bun-deps-{{ hashFiles(**/bun.lockb)}}
+
+      - name: Install deps
+        run: bun i --frozen-lockfile
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run test application
+        run: bun run test
+
+      - name: Lint application
+        run: bun run lint
+
+      - name: Deploy application
+        run: echo Deployment app
